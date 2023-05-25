@@ -13,3 +13,29 @@ block content
             .text-right
                 a.card-link(href=`/pets/${pet._id}`) View #{pet.name}
 
+    extends layout
+
+block content
+  .row
+    each pet, index in pets
+      .col-sm-4.justify-content-center
+        .card
+          img.card-img-top(src=pet.picUrl, alt='Card image cap')
+          .card-body
+            h4.card-title= pet.name
+            small.text-muted= pet.species
+            p.card-text= pet.description
+            .text-right
+                a.card-link(href=`/pets/${pet._id}`) View #{pet.name}
+    nav(aria-label='Page navigation example').d-flex.justify-content-center
+      ul.pagination
+        if currentPage > 1
+          li.page-item
+            a.page-link(href=`?page=${currentPage - 1}`) Previous
+        - var i = 1;
+        while i <= pagesCount
+          li.page-item
+            a.page-link(href=`?page=${i}`)= i++
+        if currentPage < pagesCount
+          li.page-item
+            a.page-link(href=`?page=${parseInt(currentPage) + 1}`) Next
