@@ -1,7 +1,7 @@
 // Upload to AWS S3
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
-const upload = require('s3-uploader');
+const Upload = require('s3-uploader');
 
 const client = upload(process.env.S3_BUCKET, {
   aws: {
