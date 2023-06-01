@@ -2,14 +2,16 @@ if (document.querySelector('#new-pet')) {
   document.querySelector('#new-pet')
     .addEventListener('submit', (e) => {
       e.preventDefault();
+      // FormData is a built-in JS class that allows us to easily grab all form data
+      var form = document.getElementById('new-pet');
+      var pet = new FormData(form);
 
-      let pet = {};
-      const inputs = document.querySelectorAll('.form-control');
-      for (const input of inputs) {
-        pet[input.name] = input.value;
-      }
-
-      axios.post('/pets', pet)
+      // Assign form-data headers
+      axios.post('/pets', pet, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
         .then(function (response) {
           window.location.replate(`/pets/${response.data.pet._id}`);
         })
