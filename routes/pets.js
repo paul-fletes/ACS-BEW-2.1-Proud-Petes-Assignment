@@ -3,7 +3,7 @@ const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 const Upload = require('s3-uploader');
 
-const client = upload(process.env.S3_BUCKET, {
+const client = new Upload(process.env.S3_BUCKET, {
   aws: {
     path: 'pets/avatar',
     region: process.env.S3_REGION,
